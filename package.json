@@ -1,6 +1,6 @@
 {
-  "name": "nestnetworking",
-  "version": "1.0.0",
+  "name": "nest-networking",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexzanderFlores/nest-networking-npm.git"
+  },
   "dependencies": {
     "aws-sdk": "^2.953.0",
     "mongoose": "^5.13.3",
