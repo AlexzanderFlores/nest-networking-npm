@@ -1,7 +1,5 @@
 import getKeys from './getKeys'
-import mongo from './mongo'
-import { getConnection } from './redis'
-
-const redis = getConnection
+import { mongo } from './mongo'
+import { redis } from './redis'
 
 export { getKeys, mongo, redis }

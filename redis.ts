@@ -1,7 +1,7 @@
-import redis, { RedisClient } from 'redis'
+import redisPackage, { RedisClient } from 'redis'
 import getKeys from './getKeys'
 
-export const getConnection = async (runnable: Function): Promise<any> => {
+export const redis = async (runnable: Function): Promise<any> => {
   const redisClient = await connectToRedis()
   try {
     return await runnable(redisClient)
@@ -17,7 +17,7 @@ export const getUri = async () => {
 
 const connectToRedis = async (): Promise<RedisClient> => {
   return await new Promise(async (resolve, reject) => {
-    const client = redis.createClient({ url: await getUri() })
+    const client = redisPackage.createClient({ url: await getUri() })
 
     client.on('error', (err: Error | null) => {
       console.log('Redis connection error:', err)

@@ -39,10 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUri = exports.getConnection = void 0;
+exports.getUri = exports.redis = void 0;
 var redis_1 = __importDefault(require("redis"));
 var getKeys_1 = __importDefault(require("./getKeys"));
-exports.getConnection = function (runnable) { return __awaiter(void 0, void 0, void 0, function () {
+exports.redis = function (runnable) { return __awaiter(void 0, void 0, void 0, function () {
     var redisClient;
     return __generator(this, function (_a) {
         switch (_a.label) {

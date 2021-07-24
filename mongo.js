@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConnectionOptions = void 0;
+exports.mongo = exports.getConnectionOptions = void 0;
 var mongoose_1 = __importDefault(require("mongoose"));
 var getKeys_1 = __importDefault(require("./getKeys"));
 var key;
@@ -50,6 +50,25 @@ exports.getConnectionOptions = function () {
         useUnifiedTopology: true,
     };
 };
+exports.mongo = function (runnable) { return __awaiter(void 0, void 0, void 0, function () {
+    var connection;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, connectToMongo()];
+            case 1:
+                connection = _a.sent();
+                _a.label = 2;
+            case 2:
+                _a.trys.push([2, , 4, 5]);
+                return [4 /*yield*/, runnable(connection)];
+            case 3: return [2 /*return*/, _a.sent()];
+            case 4:
+                connection.close();
+                return [7 /*endfinally*/];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
 var connectToMongo = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {

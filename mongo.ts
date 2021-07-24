@@ -11,6 +11,15 @@ export const getConnectionOptions = () => {
   }
 }
 
+export const mongo = async (runnable: Function): Promise<any> => {
+  const connection = await connectToMongo()
+  try {
+    return await runnable(connection)
+  } finally {
+    connection.close()
+  }
+}
+
 const connectToMongo = async () => {
   if (!key) {
     key = (await getKeys()).mongo_uri
