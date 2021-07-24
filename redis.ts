@@ -1,14 +1,6 @@
 import redisPackage, { RedisClient } from 'redis'
 import getKeys from './getKeys'
-
-export const redis = async (runnable: Function): Promise<any> => {
-  const redisClient = await connectToRedis()
-  try {
-    return await runnable(redisClient)
-  } finally {
-    redisClient.quit()
-  }
-}
+import cleanUp from './cleanUp'
 
 export const getUri = async () => {
   const { redis_uri } = await getKeys()
@@ -27,7 +19,12 @@ const connectToRedis = async (): Promise<RedisClient> => {
       })
     })
 
-    client.on('ready', () => resolve(client))
+    client.on('ready', () => {
+      cleanUp(() => {
+        client.quit()
+      })
+      resolve(client)
+    })
   })
 }
 

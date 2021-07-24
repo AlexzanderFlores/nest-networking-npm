@@ -35,41 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getConnectionOptions = void 0;
-var mongoose_1 = __importDefault(require("mongoose"));
-var getKeys_1 = __importDefault(require("./getKeys"));
-var cleanUp_1 = __importDefault(require("./cleanUp"));
-var key;
-exports.getConnectionOptions = function () {
-    return {
-        useNewUrlParser: true,
-        useFindAndModify: false,
-        useUnifiedTopology: true,
-    };
-};
-var connectToMongo = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var connection;
+exports.cleanUp = void 0;
+var functions = [];
+exports.cleanUp = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var _i, functions_1, func;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                if (!!key) return [3 /*break*/, 2];
-                return [4 /*yield*/, getKeys_1.default()];
+                _i = 0, functions_1 = functions;
+                _a.label = 1;
             case 1:
-                key = (_a.sent()).mongo_uri;
-                _a.label = 2;
-            case 2: return [4 /*yield*/, mongoose_1.default.connect(key, exports.getConnectionOptions())];
+                if (!(_i < functions_1.length)) return [3 /*break*/, 4];
+                func = functions_1[_i];
+                return [4 /*yield*/, func()];
+            case 2:
+                _a.sent();
+                _a.label = 3;
             case 3:
-                connection = (_a.sent())
-                    .connection;
-                cleanUp_1.default(function () {
-                    connection.close();
-                });
-                return [2 /*return*/, connection];
+                _i++;
+                return [3 /*break*/, 1];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
-exports.default = connectToMongo;
+var addCleanUpFunction = function (runnable) {
+    functions.push(runnable);
+};
+exports.default = addCleanUpFunction;

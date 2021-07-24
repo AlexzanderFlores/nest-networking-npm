@@ -1,5 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose, { Connection } from 'mongoose'
 import getKeys from './getKeys'
+import cleanUp from './cleanUp'
 
 let key: string
 
@@ -11,21 +12,19 @@ export const getConnectionOptions = () => {
   }
 }
 
-export const mongo = async (runnable: Function): Promise<any> => {
-  const connection = await connectToMongo()
-  try {
-    return await runnable(connection)
-  } finally {
-    connection.close()
-  }
-}
-
-const connectToMongo = async () => {
+const connectToMongo = async (): Promise<Connection> => {
   if (!key) {
     key = (await getKeys()).mongo_uri
   }
 
-  return (await mongoose.connect(key, getConnectionOptions())).connection
+  const connection = (await mongoose.connect(key, getConnectionOptions()))
+    .connection
+
+  cleanUp(() => {
+    connection.close()
+  })
+
+  return connection
 }
 
 export default connectToMongo

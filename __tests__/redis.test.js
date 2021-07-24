@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var redis_1 = __importDefault(require("../redis"));
+var cleanUp_1 = require("../cleanUp");
 describe('redis connection', function () {
     var connection;
     beforeAll(function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -54,7 +55,7 @@ describe('redis connection', function () {
     }); });
     afterAll(function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            connection.quit();
+            cleanUp_1.cleanUp();
             return [2 /*return*/];
         });
     }); });

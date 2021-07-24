@@ -39,28 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUri = exports.redis = void 0;
+exports.getUri = void 0;
 var redis_1 = __importDefault(require("redis"));
 var getKeys_1 = __importDefault(require("./getKeys"));
-exports.redis = function (runnable) { return __awaiter(void 0, void 0, void 0, function () {
-    var redisClient;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, connectToRedis()];
-            case 1:
-                redisClient = _a.sent();
-                _a.label = 2;
-            case 2:
-                _a.trys.push([2, , 4, 5]);
-                return [4 /*yield*/, runnable(redisClient)];
-            case 3: return [2 /*return*/, _a.sent()];
-            case 4:
-                redisClient.quit();
-                return [7 /*endfinally*/];
-            case 5: return [2 /*return*/];
-        }
-    });
-}); };
+var cleanUp_1 = __importDefault(require("./cleanUp"));
 exports.getUri = function () { return __awaiter(void 0, void 0, void 0, function () {
     var redis_uri;
     return __generator(this, function (_a) {
@@ -92,7 +74,12 @@ var connectToRedis = function () { return __awaiter(void 0, void 0, void 0, func
                                         err: err,
                                     });
                                 });
-                                client.on('ready', function () { return resolve(client); });
+                                client.on('ready', function () {
+                                    cleanUp_1.default(function () {
+                                        client.quit();
+                                    });
+                                    resolve(client);
+                                });
                                 return [2 /*return*/];
                         }
                     });

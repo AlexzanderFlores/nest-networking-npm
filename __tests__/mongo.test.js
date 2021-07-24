@@ -56,6 +56,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongo_1 = __importStar(require("../mongo"));
+var cleanUp_1 = require("../cleanUp");
 describe('mongo connection', function () {
     var connection;
     beforeAll(function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -69,7 +70,7 @@ describe('mongo connection', function () {
         });
     }); });
     afterAll(function () {
-        connection.close();
+        cleanUp_1.cleanUp();
     });
     test('should return a truthy object for the mongo connection', function () {
         expect(connection).toBeTruthy();

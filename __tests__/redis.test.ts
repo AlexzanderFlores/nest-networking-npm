@@ -1,5 +1,6 @@
 import { RedisClient } from 'redis'
 import redisConn from '../redis'
+import { cleanUp } from '../cleanUp'
 
 describe('redis connection', () => {
   let connection: RedisClient
@@ -9,7 +10,7 @@ describe('redis connection', () => {
   })
 
   afterAll(async () => {
-    connection.quit()
+    cleanUp()
   })
 
   test('should return a truthy object for the redis connection', () => {

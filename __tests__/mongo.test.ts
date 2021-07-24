@@ -1,5 +1,6 @@
 import { Connection } from 'mongoose'
 import mongo, { getConnectionOptions } from '../mongo'
+import { cleanUp } from '../cleanUp'
 
 describe('mongo connection', () => {
   let connection: Connection
@@ -9,7 +10,7 @@ describe('mongo connection', () => {
   })
 
   afterAll(() => {
-    connection.close()
+    cleanUp()
   })
 
   test('should return a truthy object for the mongo connection', () => {
