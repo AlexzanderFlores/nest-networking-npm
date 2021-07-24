@@ -1,0 +1,25 @@
+{
+  "name": "nestnetworking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "testWatch": "jest --watchAll --maxWorkers=1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.953.0",
+    "mongoose": "^5.13.3",
+    "redis": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/mongoose": "^5.11.97",
+    "@types/redis": "^2.8.31",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4"
+  }
+}
